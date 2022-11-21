@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "284885568525",
+    "project_id": "hub-de-ideias",
+    "storage_bucket": "hub-de-ideias.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284885568525:android:3ab4db9a82724742815944",
+        "android_client_info": {
+          "package_name": "com.example.flutter_hub_ideias"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "284885568525-rpudjj6sqcepi303d7me114pqe50d8rp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWZK4ii6gmhbI_HAgcuaUrwrx0TjZJEWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "284885568525-rpudjj6sqcepi303d7me114pqe50d8rp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
