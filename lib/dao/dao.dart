@@ -1,15 +1,19 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_hub_ideias/models/note.dart';
 import 'package:flutter_hub_ideias/widgets/card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-getNotes() async {
-  await Firebase.initializeApp();
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
-  firestore.collection('Notas').doc().get().then((value) => value.data());
+final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+Stream<QuerySnapshot<Map<String, dynamic>>> getNotes() {
+  return _firestore
+      .collection('Notas')
+      .orderBy('Titulo', descending: true)
+      .snapshots();
 }
 
-List<CardWidget> cards = [
+List<CardWidget> cardss = [
   CardWidget(
     note: NoteModel(content: "Conteudo 1", title: "Titulo 1"),
   ),

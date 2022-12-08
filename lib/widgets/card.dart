@@ -28,4 +28,12 @@ class CardWidget extends StatelessWidget {
       ),
     );
   }
+
+  static List<CardWidget> listNoteToListCard(List<NoteModel> notes) {
+    List<CardWidget> cards = [];
+    for (NoteModel element in notes) {
+      cards.add(CardWidget(note: element));
+    }
+    return cards;
+  }
 }

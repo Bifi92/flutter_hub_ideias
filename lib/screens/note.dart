@@ -24,7 +24,6 @@ class NoteScreen extends StatelessWidget {
         TextEditingController();
 
     final formKey = GlobalKey<FormState>();
-    //getNotes();
 
     _setArguments(
       context,
