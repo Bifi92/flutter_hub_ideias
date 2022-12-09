@@ -40,7 +40,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, '/create-note',
-              arguments: NoteModel(title: "", content: ""));
+              arguments: NoteModel(id: "", title: "", content: ""));
         },
         child: const Icon(Icons.add),
       ),

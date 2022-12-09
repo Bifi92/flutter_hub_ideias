@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_hub_ideias/constants/constants.dart';
 import 'package:flutter_hub_ideias/models/note.dart';
 import 'package:flutter_hub_ideias/widgets/card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,25 +9,43 @@ final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 Stream<QuerySnapshot<Map<String, dynamic>>> getNotes() {
   return _firestore
-      .collection('Notas')
-      .orderBy('Titulo', descending: true)
+      .collection(C_NOTAS)
+      .orderBy(F_NOTA_TITULO, descending: true)
       .snapshots();
 }
 
-List<CardWidget> cardss = [
-  CardWidget(
-    note: NoteModel(content: "Conteudo 1", title: "Titulo 1"),
-  ),
-  CardWidget(
-    note: NoteModel(content: "", title: "Titulo 2"),
-  ),
-  CardWidget(
-    note: NoteModel(content: "Conteudo 3", title: "Titulo 3"),
-  ),
-  CardWidget(
-    note: NoteModel(content: "Conteudo 4", title: "Titulo 4"),
-  ),
-  CardWidget(
-    note: NoteModel(content: "Conteudo 5", title: "Titulo 5"),
-  )
-];
+Future<void> saveNote(NoteModel note) async {
+  final noteId = _firestore.collection(C_NOTAS).doc().id;
+
+  if (note.id != "") {
+    _firestore
+        .collection(C_NOTAS)
+        .where(F_NOTA_ID, isEqualTo: note.id)
+        .get()
+        .then((QuerySnapshot<Map<String, dynamic>> snapshot) async {
+      if (snapshot.docs.isEmpty) return;
+      for (DocumentSnapshot<Map<String, dynamic>> doc in snapshot.docs) {
+        await doc.reference.update(note.toDoc());
+      }
+    });
+  } else {
+    _firestore.collection(C_NOTAS).add({
+      F_NOTA_CONTEUDO: note.content,
+      F_NOTA_TITULO: note.title,
+      F_NOTA_ID: noteId,
+    });
+  }
+}
+
+void deleteNote(String idNota) {
+  _firestore
+      .collection(C_NOTAS)
+      .where(F_NOTA_ID, isEqualTo: idNota)
+      .get()
+      .then((QuerySnapshot<Map<String, dynamic>> snapshot) async {
+    if (snapshot.docs.isEmpty) return;
+    for (DocumentSnapshot<Map<String, dynamic>> doc in snapshot.docs) {
+      await doc.reference.delete();
+    }
+  });
+}

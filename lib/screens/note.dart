@@ -7,12 +7,13 @@ class NoteScreen extends StatelessWidget {
 
   final String acao;
 
-  _setArguments(
-      context, titleTextFormFieldController, contentTextFormFieldController) {
+  _setArguments(context, titleTextFormFieldController,
+      contentTextFormFieldController, idTextFormFieldController) {
     NoteModel note = ModalRoute.of(context)!.settings.arguments as NoteModel;
 
     titleTextFormFieldController.text = note.title;
     contentTextFormFieldController.text = note.content;
+    idTextFormFieldController.text = note.id;
   }
 
   @override
@@ -23,18 +24,32 @@ class NoteScreen extends StatelessWidget {
     final TextEditingController contentTextFormFieldController =
         TextEditingController();
 
+    final TextEditingController idTextFormFieldController =
+        TextEditingController();
+
     final formKey = GlobalKey<FormState>();
 
     _setArguments(
       context,
       titleTextFormFieldController,
       contentTextFormFieldController,
+      idTextFormFieldController,
     );
 
     onSave() {
       formKey.currentState?.validate();
-      debugPrint(titleTextFormFieldController.text);
-      debugPrint(contentTextFormFieldController.text);
+      saveNote(
+        NoteModel(
+            id: idTextFormFieldController.text,
+            title: titleTextFormFieldController.text,
+            content: contentTextFormFieldController.text),
+      );
+      Navigator.pop(context);
+    }
+
+    onDelete() {
+      deleteNote(idTextFormFieldController.text);
+      Navigator.pop(context);
     }
 
     return Scaffold(
@@ -48,7 +63,9 @@ class NoteScreen extends StatelessWidget {
               icon: const Icon(Icons.check),
               tooltip: 'Salvar'),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                onDelete();
+              },
               icon: const Icon(Icons.delete_forever),
               tooltip: 'Deletar')
         ],
