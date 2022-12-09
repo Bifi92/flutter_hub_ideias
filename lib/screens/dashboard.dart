@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hub_ideias/constants/constants.dart';
 import 'package:flutter_hub_ideias/dao/dao.dart';
 import 'package:flutter_hub_ideias/models/note.dart';
 import 'package:flutter_hub_ideias/widgets/card.dart';
@@ -16,7 +17,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dashboard'),
+        title: const Text(L_DASHBOARD),
       ),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
           stream: getNotes(),
@@ -25,7 +26,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               return const CircularProgressIndicator();
             } else if (snapshot.data!.docs.isEmpty) {
               return const Center(
-                child: Text("Nenhuma nota encontrada"),
+                child: Text(L_NENHUMA_NOTA_ENCONTRADA),
               );
             } else {
               final List<NoteModel> notes =
@@ -39,8 +40,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/create-note',
-              arguments: NoteModel(id: "", title: "", content: ""));
+          Navigator.pushNamed(context, R_CREATE_NOTE,
+              arguments:
+                  NoteModel(id: L_VAZIO, title: L_VAZIO, content: L_VAZIO));
         },
         child: const Icon(Icons.add),
       ),

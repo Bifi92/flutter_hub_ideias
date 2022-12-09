@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hub_ideias/constants/constants.dart';
 import 'package:flutter_hub_ideias/models/note.dart';
 
 class CardWidget extends StatelessWidget {
@@ -15,7 +16,7 @@ class CardWidget extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, '/edit-note', arguments: note);
+          Navigator.pushNamed(context, R_EDIT_NOTE, arguments: note);
         },
         child: SizedBox(
           height: 100,

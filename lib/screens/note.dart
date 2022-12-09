@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hub_ideias/constants/constants.dart';
 import 'package:flutter_hub_ideias/dao/dao.dart';
 import 'package:flutter_hub_ideias/models/note.dart';
 
@@ -54,20 +55,20 @@ class NoteScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('$acao Nota'),
+        title: Text('$acao $L_NOTA'),
         actions: [
           IconButton(
               onPressed: () {
                 onSave();
               },
               icon: const Icon(Icons.check),
-              tooltip: 'Salvar'),
+              tooltip: L_SALVAR),
           IconButton(
               onPressed: () {
                 onDelete();
               },
               icon: const Icon(Icons.delete_forever),
-              tooltip: 'Deletar')
+              tooltip: L_DELETAR)
         ],
       ),
       body: Form(
@@ -80,7 +81,7 @@ class NoteScreen extends StatelessWidget {
                 child: TextFormField(
                   controller: titleTextFormFieldController,
                   decoration: const InputDecoration(
-                    hintText: "Título",
+                    hintText: L_TITULO,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(25.0),
@@ -90,7 +91,7 @@ class NoteScreen extends StatelessWidget {
                   style: const TextStyle(fontWeight: FontWeight.bold),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Campo obrigatório";
+                      return L_CAMPO_OBRIGATORIO;
                     }
                   },
                 ),
@@ -102,7 +103,7 @@ class NoteScreen extends StatelessWidget {
                   minLines: 25,
                   controller: contentTextFormFieldController,
                   decoration: const InputDecoration(
-                    hintText: "Conteúdo",
+                    hintText: L_CONTEUDO,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(25.0),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hub_ideias/constants/constants.dart';
 import 'package:flutter_hub_ideias/routes/route.dart';
 
 class MyApp extends StatelessWidget {
@@ -8,11 +9,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Hub de ideias',
+      title: L_HUB_DE_IDEIAS,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
+      initialRoute: R_DASHBOARD,
       routes: rotes,
     );
   }

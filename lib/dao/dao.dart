@@ -1,8 +1,5 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_hub_ideias/constants/constants.dart';
 import 'package:flutter_hub_ideias/models/note.dart';
-import 'package:flutter_hub_ideias/widgets/card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -17,7 +14,7 @@ Stream<QuerySnapshot<Map<String, dynamic>>> getNotes() {
 Future<void> saveNote(NoteModel note) async {
   final noteId = _firestore.collection(C_NOTAS).doc().id;
 
-  if (note.id != "") {
+  if (note.id != L_VAZIO) {
     _firestore
         .collection(C_NOTAS)
         .where(F_NOTA_ID, isEqualTo: note.id)

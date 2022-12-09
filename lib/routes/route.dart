@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_hub_ideias/constants/constants.dart';
 import 'package:flutter_hub_ideias/screens/dashboard.dart';
 import 'package:flutter_hub_ideias/screens/note.dart';
 
 Map<String, WidgetBuilder> rotes = {
-  "/": (context) => const DashboardScreen(),
-  "/edit-note": (context) => const NoteScreen(acao: 'Editar'),
-  "/create-note": (context) => const NoteScreen(acao: 'Criar')
+  R_DASHBOARD: (context) => const DashboardScreen(),
+  R_EDIT_NOTE: (context) => const NoteScreen(acao: L_EDITAR),
+  R_CREATE_NOTE: (context) => const NoteScreen(acao: L_CRIAR)
 };
