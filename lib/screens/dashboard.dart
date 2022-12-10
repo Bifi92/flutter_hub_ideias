@@ -23,7 +23,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           stream: getNotes(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.data!.docs.isEmpty) {
               return const Center(
                 child: Text(L_NENHUMA_NOTA_ENCONTRADA),
