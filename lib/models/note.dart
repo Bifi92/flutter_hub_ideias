@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_hub_ideias/constants/constants.dart';
+import 'package:flutter_hub_ideias/utils/constants/constants.dart';
 
 class NoteModel {
   late String id;

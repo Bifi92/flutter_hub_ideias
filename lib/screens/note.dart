@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hub_ideias/constants/constants.dart';
+import 'package:flutter_hub_ideias/utils/constants/constants.dart';
 import 'package:flutter_hub_ideias/dao/dao.dart';
 import 'package:flutter_hub_ideias/models/note.dart';
 

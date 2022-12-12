@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hub_ideias/constants/constants.dart';
+import 'package:flutter_hub_ideias/utils/constants/constants.dart';
 import 'package:flutter_hub_ideias/routes/route.dart';
 
 class MyApp extends StatelessWidget {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: R_DASHBOARD,
+      initialRoute: R_LOGIN,
       routes: rotes,
     );
   }
