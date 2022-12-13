@@ -6,14 +6,9 @@ import 'package:flutter_hub_ideias/dao/dao.dart';
 import 'package:flutter_hub_ideias/models/note.dart';
 import 'package:flutter_hub_ideias/utils/widgets/card.dart';
 
-class DashboardScreen extends StatefulWidget {
+class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
-  @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
-}
-
-class _DashboardScreenState extends State<DashboardScreen> {
   logout(BuildContext context) async {
     await FirebaseAuth.instance.signOut().then((value) {
       Navigator.pushReplacementNamed(context, R_LOGIN);

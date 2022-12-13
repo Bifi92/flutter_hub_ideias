@@ -5,6 +5,7 @@ import 'package:flutter_hub_ideias/utils/widgets/snack_bar.dart';
 
 class LogInScreen extends StatelessWidget {
   const LogInScreen({super.key});
+  static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +14,6 @@ class LogInScreen extends StatelessWidget {
 
     final TextEditingController senhaTextFormFieldController =
         TextEditingController();
-
-    final formKey = GlobalKey<FormState>();
 
     login(BuildContext context) async {
       formKey.currentState?.validate();
