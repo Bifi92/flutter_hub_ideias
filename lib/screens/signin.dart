@@ -8,14 +8,14 @@ class SignInScreen extends StatelessWidget {
 
   static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  static final TextEditingController emailTextFormFieldController =
+      TextEditingController();
+
+  static final TextEditingController senhaTextFormFieldController =
+      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    final TextEditingController emailTextFormFieldController =
-        TextEditingController();
-
-    final TextEditingController senhaTextFormFieldController =
-        TextEditingController();
-
     signin(BuildContext context) async {
       formKey.currentState?.validate();
       String email = emailTextFormFieldController.text;

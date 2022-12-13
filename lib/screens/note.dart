@@ -7,7 +7,17 @@ class NoteScreen extends StatelessWidget {
   const NoteScreen({required this.acao, super.key});
 
   final String acao;
+
   static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  static final TextEditingController titleTextFormFieldController =
+      TextEditingController();
+
+  static final TextEditingController contentTextFormFieldController =
+      TextEditingController();
+
+  static final TextEditingController idTextFormFieldController =
+      TextEditingController();
 
   _setArguments(context, titleTextFormFieldController,
       contentTextFormFieldController, idTextFormFieldController) {
@@ -20,15 +30,6 @@ class NoteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController titleTextFormFieldController =
-        TextEditingController();
-
-    final TextEditingController contentTextFormFieldController =
-        TextEditingController();
-
-    final TextEditingController idTextFormFieldController =
-        TextEditingController();
-
     _setArguments(
       context,
       titleTextFormFieldController,
