@@ -15,11 +15,20 @@ class DashboardScreen extends StatelessWidget {
     });
   }
 
+  String _getUserName() {
+    var currentUser = FirebaseAuth.instance.currentUser;
+    String nome = 'Anonimo';
+    if (currentUser != null && currentUser.displayName != null) {
+      nome = currentUser.displayName!;
+    }
+    return nome;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(L_DASHBOARD),
+        title: Text('$L_DASHBOARD: ${_getUserName()}'),
         actions: [
           IconButton(
               onPressed: () {

@@ -14,30 +14,38 @@ class SignInScreen extends StatelessWidget {
   static final TextEditingController senhaTextFormFieldController =
       TextEditingController();
 
-  @override
-  Widget build(BuildContext context) {
-    signin(BuildContext context) async {
-      formKey.currentState?.validate();
-      String email = emailTextFormFieldController.text;
-      String senha = senhaTextFormFieldController.text;
+  static final TextEditingController nomeTextFormFieldController =
+      TextEditingController();
 
-      try {
-        await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(email: email, password: senha)
-            .then((value) {
-          debugPrint(value.user?.uid);
+  _signin(BuildContext context) async {
+    formKey.currentState?.validate();
+    String email = emailTextFormFieldController.text;
+    String senha = senhaTextFormFieldController.text;
+    String nome = nomeTextFormFieldController.text;
+
+    try {
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: senha)
+          .then((value) {
+        debugPrint(value.user?.toString());
+        value.user?.updateDisplayName(nome).then((value) {
           Navigator.pushNamedAndRemoveUntil(
               context, R_DASHBOARD, (route) => false);
         });
-      } on FirebaseAuthException catch (e) {
-        if (e.code == E_WEAK_PASSWORD) {
-          showSnackBar(context, EM_WEAK_PASSWORD);
-        } else if (e.code == E_EMAIL_ALREADY_IN_USE) {
-          showSnackBar(context, EM_EMAIL_ALREADY_IN_USE);
-        }
+      });
+    } on FirebaseAuthException catch (e) {
+      if (e.code == E_WEAK_PASSWORD) {
+        showSnackBar(context, EM_WEAK_PASSWORD);
+      } else if (e.code == E_EMAIL_ALREADY_IN_USE) {
+        showSnackBar(context, EM_EMAIL_ALREADY_IN_USE);
+      } else {
+        showSnackBar(context, EM_EMAIL_OR_PASS_INVALID);
       }
     }
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(L_CADASTRO),
@@ -50,6 +58,26 @@ class SignInScreen extends StatelessWidget {
               key: formKey,
               child: Column(
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      controller: nomeTextFormFieldController,
+                      decoration: const InputDecoration(
+                        hintText: L_NOME,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(25.0),
+                          ),
+                        ),
+                      ),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return L_CAMPO_OBRIGATORIO;
+                        }
+                      },
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
@@ -95,7 +123,7 @@ class SignInScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        signin(context);
+                        _signin(context);
                       },
                       child: const Text(L_CADASTRAR),
                     ),

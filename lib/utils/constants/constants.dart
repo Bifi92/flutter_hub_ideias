@@ -24,6 +24,7 @@ const String L_EMAIL = "Email";
 const String L_SENHA = "Senha";
 const String L_CADASTRAR = "Cadastrar";
 const String L_CADASTRO = "Cadastro";
+const String L_NOME = "Nome";
 
 // Routes
 const String R_DASHBOARD = "/dashboard";
@@ -36,6 +37,7 @@ const String R_SIGNIN = "/signin";
 const String E_WEAK_PASSWORD = 'weak-password';
 const String EM_WEAK_PASSWORD =
     'Tente uma senha mais segura (use simbolos, numeros e letras maiusculas e minusculas).';
+const String EM_EMAIL_OR_PASS_INVALID = 'Email ou senha invalido.';
 const String E_EMAIL_ALREADY_IN_USE = 'email-already-in-use';
 const String EM_EMAIL_ALREADY_IN_USE = 'Email já utilizado.';
 const String E_USER_NOT_FOUND = 'user-not-found';

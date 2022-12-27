@@ -14,30 +14,30 @@ class LogInScreen extends StatelessWidget {
   static final TextEditingController senhaTextFormFieldController =
       TextEditingController();
 
-  @override
-  Widget build(BuildContext context) {
-    login(BuildContext context) async {
-      formKey.currentState?.validate();
-      String email = emailTextFormFieldController.text;
-      String senha = senhaTextFormFieldController.text;
+  _login(BuildContext context) async {
+    formKey.currentState?.validate();
+    String email = emailTextFormFieldController.text;
+    String senha = senhaTextFormFieldController.text;
 
-      try {
-        await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: email, password: senha)
-            .then((value) {
-          debugPrint(value.user?.uid);
-          Navigator.pushNamedAndRemoveUntil(
-              context, R_DASHBOARD, (route) => false);
-        });
-      } on FirebaseAuthException catch (e) {
-        if (e.code == E_USER_NOT_FOUND) {
-          showSnackBar(context, EM_USER_NOT_FOUND);
-        } else if (e.code == E_WRONG_PASSWORD) {
-          showSnackBar(context, EM_WRONG_PASSWORD);
-        }
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: senha)
+          .then((value) {
+        debugPrint(value.user?.toString());
+        Navigator.pushNamedAndRemoveUntil(
+            context, R_DASHBOARD, (route) => false);
+      });
+    } on FirebaseAuthException catch (e) {
+      if (e.code == E_USER_NOT_FOUND) {
+        showSnackBar(context, EM_USER_NOT_FOUND);
+      } else if (e.code == E_WRONG_PASSWORD) {
+        showSnackBar(context, EM_WRONG_PASSWORD);
       }
     }
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(L_LOGIN),
@@ -95,7 +95,7 @@ class LogInScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        login(context);
+                        _login(context);
                       },
                       child: const Text(L_LOGIN),
                     ),
