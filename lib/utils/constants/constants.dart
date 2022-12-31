@@ -5,6 +5,8 @@ const String C_NOTAS = 'Notas';
 const String F_NOTA_TITULO = 'Titulo';
 const String F_NOTA_CONTEUDO = 'Conteudo';
 const String F_NOTA_ID = 'id';
+const String F_NOTA_DONO = 'Dono';
+const String F_NOTA_UUID = 'Uuid';
 
 // Labels
 const String L_VAZIO = "";

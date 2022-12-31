@@ -27,9 +27,11 @@ Future<void> saveNote(NoteModel note) async {
     });
   } else {
     _firestore.collection(C_NOTAS).add({
+      F_NOTA_DONO: note.dono,
       F_NOTA_CONTEUDO: note.content,
       F_NOTA_TITULO: note.title,
       F_NOTA_ID: noteId,
+      F_NOTA_UUID: note.uuid,
     });
   }
 }

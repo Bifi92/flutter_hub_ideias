@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hub_ideias/utils/constants/constants.dart';
 import 'package:flutter_hub_ideias/dao/dao.dart';
 import 'package:flutter_hub_ideias/models/note.dart';
+import 'package:flutter_hub_ideias/utils/utils.dart';
 import 'package:flutter_hub_ideias/utils/widgets/card.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -15,20 +16,11 @@ class DashboardScreen extends StatelessWidget {
     });
   }
 
-  String _getUserName() {
-    var currentUser = FirebaseAuth.instance.currentUser;
-    String nome = 'Anonimo';
-    if (currentUser != null && currentUser.displayName != null) {
-      nome = currentUser.displayName!;
-    }
-    return nome;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('$L_DASHBOARD: ${_getUserName()}'),
+        title: Text('$L_DASHBOARD: ${getUserName()}'),
         actions: [
           IconButton(
               onPressed: () {
@@ -59,8 +51,12 @@ class DashboardScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, R_CREATE_NOTE,
-              arguments:
-                  NoteModel(id: L_VAZIO, title: L_VAZIO, content: L_VAZIO));
+              arguments: NoteModel(
+                  id: L_VAZIO,
+                  title: L_VAZIO,
+                  content: L_VAZIO,
+                  dono: L_VAZIO,
+                  uuid: L_VAZIO));
         },
         child: const Icon(Icons.add),
       ),
