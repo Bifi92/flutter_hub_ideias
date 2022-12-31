@@ -44,9 +44,6 @@ class NoteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool usuarioAtual = uuidTextFormFieldController.text == '' ||
-        uuidTextFormFieldController.text == getUserId();
-
     _setArguments(
       context,
       titleTextFormFieldController,
@@ -74,9 +71,16 @@ class NoteScreen extends StatelessWidget {
       Navigator.pop(context);
     }
 
+    onImplementar() {
+      implementarNota(idTextFormFieldController.text, getUserId());
+    }
+
+    bool usuarioAtual = uuidTextFormFieldController.text == '' ||
+        uuidTextFormFieldController.text == getUserId();
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('$acao $L_NOTA'),
+        title: const Text(L_NOTA),
         actions: usuarioAtual
             ? [
                 IconButton(
@@ -146,7 +150,18 @@ class NoteScreen extends StatelessWidget {
                   ),
                   keyboardType: TextInputType.multiline,
                 ),
-              )
+              ),
+              !usuarioAtual
+                  ? SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: ElevatedButton(
+                          onPressed: () {
+                            onImplementar();
+                          },
+                          child: const Text("Implementar")),
+                    )
+                  : Container()
             ],
           ),
         ),

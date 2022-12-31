@@ -48,3 +48,16 @@ void deleteNote(String idNota) {
     }
   });
 }
+
+void implementarNota(String idNota, String uuid) {
+  _firestore
+      .collection(C_NOTAS)
+      .where(F_NOTA_ID, isEqualTo: idNota)
+      .get()
+      .then((QuerySnapshot<Map<String, dynamic>> snapshot) async {
+    if (snapshot.docs.isEmpty) return;
+    for (DocumentSnapshot<Map<String, dynamic>> doc in snapshot.docs) {
+      await doc.reference.update({F_DESENVOLVEDOR: uuid});
+    }
+  });
+}
