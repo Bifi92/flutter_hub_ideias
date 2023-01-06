@@ -32,6 +32,8 @@ Future<void> saveNote(NoteModel note) async {
       F_NOTA_TITULO: note.title,
       F_NOTA_ID: noteId,
       F_NOTA_UUID: note.uuid,
+      F_DESENVOLVEDOR: note.desenvolvedor,
+      F_CONTEUDO_DESENVOLVEDOR: note.conteudoDesenvolvedor,
     });
   }
 }

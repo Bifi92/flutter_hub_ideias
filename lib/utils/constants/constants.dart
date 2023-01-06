@@ -8,6 +8,7 @@ const String F_NOTA_ID = 'id';
 const String F_NOTA_DONO = 'Dono';
 const String F_NOTA_UUID = 'Uuid';
 const String F_DESENVOLVEDOR = 'Desenvolvedor';
+const String F_CONTEUDO_DESENVOLVEDOR = 'Conteudo Desenvolvedor';
 
 // Labels
 const String L_VAZIO = "";
@@ -28,6 +29,7 @@ const String L_SENHA = "Senha";
 const String L_CADASTRAR = "Cadastrar";
 const String L_CADASTRO = "Cadastro";
 const String L_NOME = "Nome";
+const String L_CONTEUDO_DESENVOLVEDOR = "Conteúdo do Desenvolvedor";
 
 // Routes
 const String R_DASHBOARD = "/dashboard";

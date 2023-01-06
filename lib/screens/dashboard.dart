@@ -52,11 +52,14 @@ class DashboardScreen extends StatelessWidget {
         onPressed: () {
           Navigator.pushNamed(context, R_CREATE_NOTE,
               arguments: NoteModel(
-                  id: L_VAZIO,
-                  title: L_VAZIO,
-                  content: L_VAZIO,
-                  dono: L_VAZIO,
-                  uuid: L_VAZIO));
+                id: L_VAZIO,
+                title: L_VAZIO,
+                content: L_VAZIO,
+                dono: L_VAZIO,
+                uuid: L_VAZIO,
+                desenvolvedor: L_VAZIO,
+                conteudoDesenvolvedor: L_VAZIO,
+              ));
         },
         child: const Icon(Icons.add),
       ),

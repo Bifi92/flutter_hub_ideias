@@ -7,12 +7,17 @@ class NoteModel {
   late String content;
   late String dono;
   late String uuid;
-  NoteModel(
-      {required this.id,
-      required this.title,
-      required this.content,
-      required this.dono,
-      required this.uuid});
+  late String desenvolvedor;
+  late String conteudoDesenvolvedor;
+  NoteModel({
+    required this.id,
+    required this.title,
+    required this.content,
+    required this.dono,
+    required this.uuid,
+    required this.desenvolvedor,
+    required this.conteudoDesenvolvedor,
+  });
 
   static mapToObjectList(
       List<QueryDocumentSnapshot<Map<String, dynamic>>> docs) {
@@ -26,6 +31,8 @@ class NoteModel {
           content: doc[F_NOTA_CONTEUDO],
           dono: doc[F_NOTA_DONO],
           uuid: doc[F_NOTA_UUID],
+          desenvolvedor: doc[F_DESENVOLVEDOR],
+          conteudoDesenvolvedor: doc[F_CONTEUDO_DESENVOLVEDOR],
         ),
       );
     }
@@ -39,6 +46,8 @@ class NoteModel {
       F_NOTA_CONTEUDO: content,
       F_NOTA_DONO: dono,
       F_NOTA_UUID: uuid,
+      F_DESENVOLVEDOR: desenvolvedor,
+      F_CONTEUDO_DESENVOLVEDOR: conteudoDesenvolvedor,
     };
   }
 }

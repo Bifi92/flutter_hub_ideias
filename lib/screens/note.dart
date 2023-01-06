@@ -26,13 +26,21 @@ class NoteScreen extends StatelessWidget {
   static final TextEditingController uuidTextFormFieldController =
       TextEditingController();
 
+  static final TextEditingController desenvolvedorTextFormFieldController =
+      TextEditingController();
+
+  static final TextEditingController
+      conteudoDesenvolvedorTextFormFieldController = TextEditingController();
+
   _setArguments(
       context,
       titleTextFormFieldController,
       contentTextFormFieldController,
       idTextFormFieldController,
       donoTextFormFieldController,
-      uuidTextFormFieldController) {
+      uuidTextFormFieldController,
+      desenvolvedorTextFormFieldController,
+      conteudoDesenvolvedorTextFormFieldController) {
     NoteModel note = ModalRoute.of(context)!.settings.arguments as NoteModel;
 
     titleTextFormFieldController.text = note.title;
@@ -40,6 +48,9 @@ class NoteScreen extends StatelessWidget {
     idTextFormFieldController.text = note.id;
     donoTextFormFieldController.text = note.dono;
     uuidTextFormFieldController.text = note.uuid;
+    desenvolvedorTextFormFieldController.text = note.desenvolvedor;
+    conteudoDesenvolvedorTextFormFieldController.text =
+        note.conteudoDesenvolvedor;
   }
 
   @override
@@ -51,17 +62,27 @@ class NoteScreen extends StatelessWidget {
       idTextFormFieldController,
       donoTextFormFieldController,
       uuidTextFormFieldController,
+      desenvolvedorTextFormFieldController,
+      conteudoDesenvolvedorTextFormFieldController,
     );
 
     onSave() {
       formKey.currentState?.validate();
       saveNote(
         NoteModel(
-            id: idTextFormFieldController.text,
-            title: titleTextFormFieldController.text,
-            content: contentTextFormFieldController.text,
-            dono: getUserName(),
-            uuid: getUserId()),
+          id: idTextFormFieldController.text,
+          title: titleTextFormFieldController.text,
+          content: contentTextFormFieldController.text,
+          dono: donoTextFormFieldController.text != ''
+              ? donoTextFormFieldController.text
+              : getUserName(),
+          uuid: uuidTextFormFieldController.text != ''
+              ? uuidTextFormFieldController.text
+              : getUserId(),
+          desenvolvedor: desenvolvedorTextFormFieldController.text,
+          conteudoDesenvolvedor:
+              conteudoDesenvolvedorTextFormFieldController.text,
+        ),
       );
       Navigator.pop(context);
     }
@@ -73,15 +94,21 @@ class NoteScreen extends StatelessWidget {
 
     onImplementar() {
       implementarNota(idTextFormFieldController.text, getUserId());
+      Navigator.pop(context);
     }
 
     bool usuarioAtual = uuidTextFormFieldController.text == '' ||
         uuidTextFormFieldController.text == getUserId();
 
+    bool semDesenvolvedor = desenvolvedorTextFormFieldController.text == '';
+
+    bool desenvolvedorAtual =
+        desenvolvedorTextFormFieldController.text == getUserId();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(L_NOTA),
-        actions: usuarioAtual
+        actions: usuarioAtual || desenvolvedorAtual
             ? [
                 IconButton(
                     onPressed: () {
@@ -151,7 +178,28 @@ class NoteScreen extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                 ),
               ),
-              !usuarioAtual
+              (usuarioAtual && !semDesenvolvedor) || desenvolvedorAtual
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        enabled: desenvolvedorAtual,
+                        maxLines: null,
+                        minLines: 25,
+                        controller:
+                            conteudoDesenvolvedorTextFormFieldController,
+                        decoration: const InputDecoration(
+                          hintText: L_CONTEUDO_DESENVOLVEDOR,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(25.0),
+                            ),
+                          ),
+                        ),
+                        keyboardType: TextInputType.multiline,
+                      ),
+                    )
+                  : Container(),
+              !usuarioAtual && semDesenvolvedor
                   ? SizedBox(
                       width: double.infinity,
                       height: 50,
