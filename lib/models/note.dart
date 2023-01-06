@@ -9,6 +9,7 @@ class NoteModel {
   late String uuid;
   late String desenvolvedor;
   late String conteudoDesenvolvedor;
+  late String nomeDesenvolvedor;
   NoteModel({
     required this.id,
     required this.title,
@@ -17,6 +18,7 @@ class NoteModel {
     required this.uuid,
     required this.desenvolvedor,
     required this.conteudoDesenvolvedor,
+    required this.nomeDesenvolvedor,
   });
 
   static mapToObjectList(
@@ -33,6 +35,7 @@ class NoteModel {
           uuid: doc[F_NOTA_UUID],
           desenvolvedor: doc[F_DESENVOLVEDOR],
           conteudoDesenvolvedor: doc[F_CONTEUDO_DESENVOLVEDOR],
+          nomeDesenvolvedor: doc[F_NOME_DESENVOLVEDOR],
         ),
       );
     }
@@ -48,6 +51,7 @@ class NoteModel {
       F_NOTA_UUID: uuid,
       F_DESENVOLVEDOR: desenvolvedor,
       F_CONTEUDO_DESENVOLVEDOR: conteudoDesenvolvedor,
+      F_NOME_DESENVOLVEDOR: nomeDesenvolvedor,
     };
   }
 }

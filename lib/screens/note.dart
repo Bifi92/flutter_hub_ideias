@@ -32,15 +32,20 @@ class NoteScreen extends StatelessWidget {
   static final TextEditingController
       conteudoDesenvolvedorTextFormFieldController = TextEditingController();
 
+  static final TextEditingController nomeDesenvolvedorTextFormFieldController =
+      TextEditingController();
+
   _setArguments(
-      context,
-      titleTextFormFieldController,
-      contentTextFormFieldController,
-      idTextFormFieldController,
-      donoTextFormFieldController,
-      uuidTextFormFieldController,
-      desenvolvedorTextFormFieldController,
-      conteudoDesenvolvedorTextFormFieldController) {
+    context,
+    titleTextFormFieldController,
+    contentTextFormFieldController,
+    idTextFormFieldController,
+    donoTextFormFieldController,
+    uuidTextFormFieldController,
+    desenvolvedorTextFormFieldController,
+    conteudoDesenvolvedorTextFormFieldController,
+    nomeDesenvolvedorTextFormFieldController,
+  ) {
     NoteModel note = ModalRoute.of(context)!.settings.arguments as NoteModel;
 
     titleTextFormFieldController.text = note.title;
@@ -51,6 +56,7 @@ class NoteScreen extends StatelessWidget {
     desenvolvedorTextFormFieldController.text = note.desenvolvedor;
     conteudoDesenvolvedorTextFormFieldController.text =
         note.conteudoDesenvolvedor;
+    nomeDesenvolvedorTextFormFieldController.text = note.nomeDesenvolvedor;
   }
 
   @override
@@ -64,6 +70,7 @@ class NoteScreen extends StatelessWidget {
       uuidTextFormFieldController,
       desenvolvedorTextFormFieldController,
       conteudoDesenvolvedorTextFormFieldController,
+      nomeDesenvolvedorTextFormFieldController,
     );
 
     onSave() {
@@ -82,6 +89,7 @@ class NoteScreen extends StatelessWidget {
           desenvolvedor: desenvolvedorTextFormFieldController.text,
           conteudoDesenvolvedor:
               conteudoDesenvolvedorTextFormFieldController.text,
+          nomeDesenvolvedor: nomeDesenvolvedorTextFormFieldController.text,
         ),
       );
       Navigator.pop(context);
@@ -93,7 +101,8 @@ class NoteScreen extends StatelessWidget {
     }
 
     onImplementar() {
-      implementarNota(idTextFormFieldController.text, getUserId());
+      implementarNota(
+          idTextFormFieldController.text, getUserId(), getUserName());
       Navigator.pop(context);
     }
 
@@ -116,12 +125,14 @@ class NoteScreen extends StatelessWidget {
                     },
                     icon: const Icon(Icons.check),
                     tooltip: L_SALVAR),
-                IconButton(
-                    onPressed: () {
-                      onDelete();
-                    },
-                    icon: const Icon(Icons.delete_forever),
-                    tooltip: L_DELETAR)
+                usuarioAtual
+                    ? IconButton(
+                        onPressed: () {
+                          onDelete();
+                        },
+                        icon: const Icon(Icons.delete_forever),
+                        tooltip: L_DELETAR)
+                    : Container()
               ]
             : [],
       ),

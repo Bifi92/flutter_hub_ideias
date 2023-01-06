@@ -34,6 +34,7 @@ Future<void> saveNote(NoteModel note) async {
       F_NOTA_UUID: note.uuid,
       F_DESENVOLVEDOR: note.desenvolvedor,
       F_CONTEUDO_DESENVOLVEDOR: note.conteudoDesenvolvedor,
+      F_NOME_DESENVOLVEDOR: note.nomeDesenvolvedor,
     });
   }
 }
@@ -51,7 +52,7 @@ void deleteNote(String idNota) {
   });
 }
 
-void implementarNota(String idNota, String uuid) {
+void implementarNota(String idNota, String uuid, String nomeDesenvolvedor) {
   _firestore
       .collection(C_NOTAS)
       .where(F_NOTA_ID, isEqualTo: idNota)
@@ -60,6 +61,7 @@ void implementarNota(String idNota, String uuid) {
     if (snapshot.docs.isEmpty) return;
     for (DocumentSnapshot<Map<String, dynamic>> doc in snapshot.docs) {
       await doc.reference.update({F_DESENVOLVEDOR: uuid});
+      await doc.reference.update({F_NOME_DESENVOLVEDOR: nomeDesenvolvedor});
     }
   });
 }

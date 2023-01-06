@@ -59,6 +59,7 @@ class DashboardScreen extends StatelessWidget {
                 uuid: L_VAZIO,
                 desenvolvedor: L_VAZIO,
                 conteudoDesenvolvedor: L_VAZIO,
+                nomeDesenvolvedor: L_VAZIO,
               ));
         },
         child: const Icon(Icons.add),

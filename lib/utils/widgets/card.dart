@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hub_ideias/utils/constants/constants.dart';
 import 'package:flutter_hub_ideias/models/note.dart';
+import 'package:flutter_hub_ideias/utils/utils.dart';
 
 class CardWidget extends StatelessWidget {
   const CardWidget({required this.note, super.key});
@@ -16,14 +17,36 @@ class CardWidget extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, R_EDIT_NOTE, arguments: note);
+          if (note.desenvolvedor == '' ||
+              note.desenvolvedor == getUserId() ||
+              note.uuid == getUserId()) {
+            Navigator.pushNamed(context, R_EDIT_NOTE, arguments: note);
+          }
         },
         child: SizedBox(
-          height: 100,
-          width: 100,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(child: Text(note.title)),
+          height: 150,
+          width: 150,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(child: Text('Titulo: ${note.title}')),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(child: Text('Dono: ${note.dono}')),
+              ),
+              note.desenvolvedor != ''
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                          child:
+                              Text('Desenvolvedor: ${note.nomeDesenvolvedor}')),
+                    )
+                  : Container(),
+            ],
           ),
         ),
       ),

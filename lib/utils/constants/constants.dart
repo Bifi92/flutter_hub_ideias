@@ -9,6 +9,7 @@ const String F_NOTA_DONO = 'Dono';
 const String F_NOTA_UUID = 'Uuid';
 const String F_DESENVOLVEDOR = 'Desenvolvedor';
 const String F_CONTEUDO_DESENVOLVEDOR = 'Conteudo Desenvolvedor';
+const String F_NOME_DESENVOLVEDOR = 'Nome Desenvolvedor';
 
 // Labels
 const String L_VAZIO = "";
